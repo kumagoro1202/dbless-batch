@@ -11,6 +11,43 @@
   <!-- DomainManager 実装クラス設定 -->
   <component name="domainManager" class="com.example.domain.SampleDomainManager"/>
 
+  <component name="数字"
+             class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
+    <property name="startCodePoint" value="U+0030"/>
+    <property name="endCodePoint" value="U+0039"/>
+  </component>
+
+  <component name="数字とスペース" class="nablarch.core.validation.validator.unicode.CompositeCharsetDef">
+    <property name="charsetDefList">
+      <list>
+        <component class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
+          <property name="startCodePoint" value="U+0030"/>
+          <property name="endCodePoint" value="U+0039"/>
+        </component>
+        <component class="nablarch.core.validation.validator.unicode.LiteralCharsetDef">
+          <property name="allowedCharacters" value=" "/>
+        </component>
+      </list>
+    </property>
+  </component>
+
+  <component name="半角カタカナ"
+             class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
+    <property name="startCodePoint" value="U+FF66"/>
+    <property name="endCodePoint" value="U+FF9F"/>
+  </component>
+
+  <component name="フラグ"
+             class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
+    <property name="startCodePoint" value="U+0030"/>
+    <property name="endCodePoint" value="U+0031"/>
+  </component>
+
+  <component name="地名漢字" class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
+    <property name="startCodePoint" value="U+3001"/>
+    <property name="endCodePoint" value="U+9F8d"/>
+  </component>
+
   <!-- 環境設定ファイル -->
   <config-file file="common.config"/>
   <config-file file="env.config"/>
@@ -52,6 +89,8 @@
     <!-- マルチスレッド実行制御ハンドラ -->
     <component-ref name="multiThreadExecutionHandler"/>
 
+    <component class="com.example.system.fw.handler.LoopHandler"/>
+
     <!-- データリードハンドラ -->
     <component-ref name="dataReadHandler"/>
   </list>
@@ -66,4 +105,21 @@
       </list>
     </property>
   </component>
+
+  <!-- ファイルパス管理の設定 -->
+  <component name="filePathSetting" class="nablarch.core.util.FilePathSetting">
+    <!-- ディレクトリの設定 -->
+    <property name="basePathSettings">
+      <map>
+        <entry key="csv-input" value="${csv-input}"/>
+      </map>
+    </property>
+    <!-- 拡張子の設定 -->
+    <property name="fileExtensions">
+      <map>
+        <entry key="csv-input" value="csv"/>
+      </map>
+    </property>
+  </component>
+
 </component-configuration>
