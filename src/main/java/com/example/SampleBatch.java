@@ -1,6 +1,5 @@
 package com.example;
 
-import nablarch.common.code.CodeUtil;
 import nablarch.common.io.FileRecordWriterHolder;
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
@@ -39,7 +38,6 @@ import java.util.Map;
  * "thread context","OK"
  * </pre>
  * </p>
- *
  * @deprecated TODO 疎通確認完了後、削除して下さい。
  */
 public class SampleBatch extends NoInputDataBatchAction {
@@ -65,17 +63,6 @@ public class SampleBatch extends NoInputDataBatchAction {
     private static final String MESSAGE_ID = "sample.error.message";
 
     /**
-     * 疎通確認用に使用するコードID。
-     */
-    private static final String CODE_ID = "C0000001";
-
-    /**
-     * 疎通確認用に使用するコード値。
-     */
-    private static final String CODE_VALUE = "1";
-
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -92,10 +79,6 @@ public class SampleBatch extends NoInputDataBatchAction {
         // メッセージ機能の疎通確認
         checkMessageFunction();
         writeOkRecord("message");
-
-        // コード機能の疎通確認
-        checkCodeFunction();
-        writeOkRecord("code");
 
         LOGGER.logInfo("疎通確認が完了しました。");
 
@@ -115,21 +98,7 @@ public class SampleBatch extends NoInputDataBatchAction {
     }
 
     /**
-     * コード機能の疎通確認を行う。
-     */
-    private void checkCodeFunction() {
-        try {
-            String codeName = CodeUtil.getName(CODE_ID, CODE_VALUE);
-            LOGGER.logInfo("取得したコード名称：" + codeName);
-        } catch (RuntimeException e) {
-            throw new IllegalStateException(
-                    "コード機能の疎通確認に失敗しました。ネストした例外メッセージを確認して下さい。", e);
-        }
-    }
-
-    /**
      * レコードを書き込む。
-     *
      * @param okFunctionName 疎通確認OKであった機能名
      */
     private void writeOkRecord(String okFunctionName) {

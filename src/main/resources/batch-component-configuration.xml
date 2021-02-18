@@ -5,9 +5,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- テーブル定義 -->
-  <import file="nablarch/schema-config.xml"/>
-
   <!-- 精査に使用する文字集合定義 -->
   <import file="nablarch/core/validation/charset-definition.xml"/>
 
@@ -18,28 +15,15 @@
   <config-file file="common.config"/>
   <config-file file="env.config"/>
 
-  <!-- Nablarch共通機能 -->
-  <!-- コード機能 -->
-  <import file="nablarch/common/code.xml"/>
-  <!-- 自動採番型を持たないRDBMSで、ユニバーサルDAOを使用するための設定 -->
-  <import file="nablarch/common/dao.xml"/>
-  <!-- 日付 -->
-  <import file="nablarch/core/date.xml"/>
-
-
   <!--
   バッチ固有の設定読み込み
   -->
-  <!-- データベース設定-->
-  <import file="nablarch/batch/db-for-batch.xml"/>
-  <import file="data-source.xml"/>
+  <import file="core/date.xml"/>
 
   <!-- ファイルパス設置 -->
   <import file="nablarch/batch/filepath-for-batch.xml"/>
   <!-- マルチスレッド実行制御機能 -->
   <import file="nablarch/common/standalone/multi-thread.xml"/>
-  <!-- ループ・トランザクション制御機能 -->
-  <import file="nablarch/batch/loop-transaction.xml"/>
   <!-- データリード機能 -->
   <import file="nablarch/batch/batch-data-read.xml"/>
   <!-- スレッドコンテキスト機能 -->
@@ -79,10 +63,6 @@
       <list>
         <!-- common/date.xml:業務日付コンポーネント -->
         <component-ref name="businessDateProvider"/>
-        <!-- common/code.xml:コードのローダ -->
-        <component-ref name="codeLoader"/>
-        <!-- common/code.xml:コードのキャッシュ -->
-        <component-ref name="codeCache"/>
       </list>
     </property>
   </component>
