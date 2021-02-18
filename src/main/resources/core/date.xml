@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  日付関連のテスト用設定
+-->
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <config-file file="core/date.properties"/>
+
+  <!-- システム日時取得コンポーネントの設定 -->
+  <import file="nablarch/core/date/system-date.xml"/>
+
+  <!-- 業務日付 -->
+  <component name="businessDateProvider"
+             class="com.example.util.FixedBusinessDateProvider">
+    <property name="fixedDate">
+      <map>
+        <entry key="${nablarch.fixedBusinessDateProvider.defaultSegment}"
+               value="${nablarch.fixedBusinessDateProvider.fixedDate}"/>
+      </map>
+    </property>
+    <property name="defaultSegment"
+              value="${nablarch.fixedBusinessDateProvider.defaultSegment}"/>
+  </component>
+
+
+</component-configuration>
